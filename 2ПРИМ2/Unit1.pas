@@ -12,6 +12,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,5 +25,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Button1.Align := Button2.Align := alTop;
+end;
 
 end.
