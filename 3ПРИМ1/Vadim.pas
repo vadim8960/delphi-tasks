@@ -1,4 +1,4 @@
-unit Unit1;
+unit Vadim;
 
 interface
 
@@ -42,33 +42,10 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   x, y, z, u: Real;
 begin
-  try
-    x := StrToFloat(edt_x.Text);
-  except
-    ShowMessage('Ошибка ввода числа X');
-    Exit;
-  end;
-  
-  try
-    y := StrToFloat(edt_y.Text);
-  except
-    ShowMessage('Ошибка ввода числа Y');
-    Exit;
-  end;
-
-  try
-    z := StrToFloat(edt_z.Text);
-  except
-    ShowMessage('Ошибка ввода числа Z');
-    Exit;
-  end;
-
-  try
-    u := 1 / Cos(x + y) + Exp(y - z);
-  except
-    ShowMessage('Деление на ноль. Измените числа X и Y.');
-    Exit;
-  end;
+  x := StrToFloat(edt_x.Text);
+  y := StrToFloat(edt_y.Text);
+  z := StrToFloat(edt_z.Text);
+  u := 1 / Cos(x + y) + Exp(y - z);
 
   Memo1.Lines.Add('X = ' + edt_x.Text);
   Memo1.Lines.Add('Y = ' + edt_y.Text);

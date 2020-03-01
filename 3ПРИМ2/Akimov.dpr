@@ -1,8 +1,8 @@
-program Project1;
+program Akimov;
 
 uses
   Forms,
-  Unit1 in 'Unit1.pas' {Form1};
+  Vadim in 'Vadim.pas' {Form1};
 
 {$R *.res}
 

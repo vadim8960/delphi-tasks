@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 319
   Top = 166
   Width = 345
-  Height = 368
-  Caption = #1055#1088#1080#1084#1077#1088' 1'
+  Height = 364
+  Caption = 'Valerievich'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

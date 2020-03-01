@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 125
   Width = 585
   Height = 616
-  Caption = #1055#1088#1080#1084#1077#1088#1099' '#1074#1099#1088#1072#1074#1085#1080#1074#1072#1085#1080#1103
+  Caption = 'Valerievich'
   Color = clBtnFace
   Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
