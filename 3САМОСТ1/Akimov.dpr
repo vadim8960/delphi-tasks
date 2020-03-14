@@ -2,12 +2,12 @@ program Akimov;
 
 uses
   Forms,
-  Vadim in 'Vadim.pas' {Form1};
+  Vadim in 'Vadim.pas' {Valerievich};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TValerievich, Valerievich);
   Application.Run;
 end.
