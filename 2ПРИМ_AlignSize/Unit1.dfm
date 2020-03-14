@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 533
-  Top = 436
-  Width = 510
-  Height = 358
+  Left = 620
+  Top = 308
+  Width = 430
+  Height = 290
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,35 +15,35 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 21
   object Button1: TButton
-    Left = 40
-    Top = 135
+    Left = 24
+    Top = 23
     Width = 65
     Height = 41
     Caption = 'Button1'
     TabOrder = 0
   end
   object Button2: TButton
-    Left = 120
-    Top = 135
+    Left = 88
+    Top = 79
     Width = 129
     Height = 49
-    Caption = 'Button2'
+    Caption = 'Button1'
     TabOrder = 1
   end
   object Button3: TButton
-    Left = 264
-    Top = 135
+    Left = 224
+    Top = 151
     Width = 97
     Height = 25
-    Caption = 'Button3'
+    Caption = 'Button1'
     TabOrder = 2
   end
   object Button4: TButton
-    Left = 384
-    Top = 135
+    Left = 320
+    Top = 191
     Width = 67
     Height = 25
-    Caption = 'Button4'
+    Caption = 'Button1'
     TabOrder = 3
   end
 end
