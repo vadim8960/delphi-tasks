@@ -137,7 +137,7 @@ object Valerievich: TValerievich
     Width = 57
     Height = 29
     TabOrder = 0
-    Text = '1'
+    Text = '0'
   end
   object edt_y1: TEdit
     Left = 184
@@ -153,7 +153,7 @@ object Valerievich: TValerievich
     Width = 57
     Height = 29
     TabOrder = 2
-    Text = '1'
+    Text = '0'
   end
   object edt_y2: TEdit
     Left = 184
@@ -161,7 +161,7 @@ object Valerievich: TValerievich
     Width = 57
     Height = 29
     TabOrder = 3
-    Text = '1'
+    Text = '0'
   end
   object edt_x3: TEdit
     Left = 64
@@ -177,7 +177,7 @@ object Valerievich: TValerievich
     Width = 57
     Height = 29
     TabOrder = 5
-    Text = '1'
+    Text = '0'
   end
   object edt_x4: TEdit
     Left = 64

@@ -42,18 +42,48 @@ var
   x, y, v: real;
   str: string;
 begin
+  try
+    x := StrToFloat(edt_x.Text);
+  except
+    ShowMessage('Ошибка ввода числа X');
+    Exit;
+  end;
+
+  try
+    y := StrToFloat(edt_y.Text);
+  except
+    ShowMessage('Ошибка ввода числа Y');
+    Exit;
+  end;
+
   case rg_functions.ItemIndex of
     0:begin
         v := sin(x * x + y * y) + exp(y - x);
       end;
     1:begin
-        v := sin(x + y * y) / cos(x + y * y) + y * ln(x);
+        try
+          v := sin(x + y * y) / cos(x + y * y) + y * ln(x);
+        except
+          if (x = 0) then ShowMessage('X не может равняться 0');
+          if (x + y * y = Pi) then ShowMessage('X + Y * Y не может равняться Pi');
+          Exit;
+        end;
       end;
     2:begin
-        v := abs(cos(x)) + arctan(1 / y);
+        try
+          v := abs(cos(x)) + arctan(1 / y);
+        except
+          ShowMessage('Y не может равняться 0');
+          Exit;
+        end;
       end;
     3:begin
-        v := sqr(cos(x)) + abs(y) / arctan(x);
+        try
+          v := sqr(cos(x)) + abs(y) / arctan(x);
+        except
+          ShowMessage('X не может равняться 0');
+          Exit;
+        end;
       end;
   end;
 
