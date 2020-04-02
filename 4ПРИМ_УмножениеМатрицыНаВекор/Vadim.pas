@@ -118,14 +118,19 @@ begin
 end;
 
 procedure TValerievich.Button1Click(Sender: TObject);
+var
+  new_size: Integer;
 begin
   try
-    size := StrToInt(Edit1.Text);
+    new_size := StrToInt(Edit1.Text);
   except
     ShowMessage('Неккоректно введен размер матрицы');
     Exit;
   end;
-  ResizeGrid(size);
+  if (new_size <> size) then begin
+    size := new_size;
+    ResizeGrid(size);
+  end;
 end;
 
 procedure TValerievich.FormCreate(Sender: TObject);
