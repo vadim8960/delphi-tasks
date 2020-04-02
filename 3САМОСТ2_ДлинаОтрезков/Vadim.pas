@@ -38,8 +38,6 @@ type
 
 var
   Valerievich: TValerievich;
-  x1, x2, x3, x4: real;
-  y1, y2, y3, y4: real;
 
 implementation
 
@@ -53,6 +51,9 @@ begin
 end;
 
 procedure TValerievich.Button1Click(Sender: TObject);
+var
+  x1, x2, x3, x4: real;
+  y1, y2, y3, y4: real;
 begin
   try
     x1 := StrToFloat(edt_x1.Text);
