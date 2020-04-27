@@ -14,8 +14,10 @@ type
     Label3: TLabel;
     Edit1: TEdit;
     ComboBox1: TComboBox;
+    Label4: TLabel;
     procedure ComboBox1KeyPress(Sender: TObject; var Key: Char);
     procedure ComboBox1Click(Sender: TObject);
+    procedure ComboBox2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,7 +38,7 @@ begin
     Edit1.Text := '';
   end;end;
 
-procedure TForm1.ComboBox1Click(Sender: TObject);
+procedure TForm1.ComboBox2Click(Sender: TObject);
 var
   str: string;
   count, ind: integer;
@@ -51,6 +53,27 @@ begin
     delete(str, 1, ind);
   end;
   Label3.Caption := IntToStr(count);
+end;
+
+procedure TForm1.ComboBox1Click(Sender: TObject);
+var
+  str: string;
+  count, i, ind: integer;
+begin
+  count := 0;
+  ind := 0;
+  str := ComboBox1.Items[ComboBox1.ItemIndex] + ' ';
+  for i := 1 to Length(str) do begin
+    case ind of
+      0: if (str[i] <> ' ') then begin
+           ind := 1;
+           inc(count);
+         end;
+      1: if (str[i] = ' ') then
+           ind := 0;
+    end;
+  end;
+  Label4.Caption := IntToStr(count);
 end;
 
 end.
