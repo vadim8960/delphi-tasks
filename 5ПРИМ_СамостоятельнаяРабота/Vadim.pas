@@ -32,6 +32,7 @@ type
     __size: integer;
     arr: array [1..100] of String;
     procedure GetWordsArray(str: String);
+    function CheckString() : Boolean;
   public
     { Public declarations }
   end;
@@ -62,6 +63,24 @@ begin
   __size := i - 1;
 end;
 
+function TValerievich.CheckString() : Boolean;
+var
+  i, j: integer;
+  flag: Boolean;
+begin
+  flag := true;
+  for i := 1 to __size do begin
+    for j := 1 to Length(arr[i]) do begin
+      if ((arr[i][j] <> '1') and (arr[i][j] <> '0')) then begin
+        flag := false;
+        break;
+      end;
+    end;
+    if (not flag) then break;
+  end;
+  result := flag;
+end;
+
 procedure TValerievich.ComboBox1KeyPress(Sender: TObject; var Key: Char);
 begin
   if key=#13 then begin
@@ -76,6 +95,10 @@ var
 begin
   count := 0;
   GetWordsArray(ComboBox1.Items[ComboBox1.ItemIndex]);
+  if (not CheckString()) then begin
+    ShowMessage('Некорректная строка');
+    exit;
+  end;
   for i := 1 to __size do 
     if (Length(arr[i]) = 5) then
       inc(count);
@@ -88,6 +111,10 @@ var
   flag: boolean;
 begin
   GetWordsArray(ComboBox1.Items[ComboBox1.ItemIndex]);
+  if (not CheckString()) then begin
+    ShowMessage('Некорректная строка');
+    exit;
+  end;
   min_i := 1;
   flag := False;
   for i := 2 to __size do
@@ -106,6 +133,10 @@ var
   i, max_i: integer;
 begin
   GetWordsArray(ComboBox1.Items[ComboBox1.ItemIndex]);
+  if (not CheckString()) then begin
+    ShowMessage('Некорректная строка');
+    exit;
+  end;
   max_i := 1;
   for i := 2 to __size do
     if (Length(arr[i]) > Length(arr[max_i])) then
@@ -120,6 +151,10 @@ var
   flag: boolean;
 begin
   GetWordsArray(ComboBox1.Items[ComboBox1.ItemIndex]);
+  if (not CheckString()) then begin
+    ShowMessage('Некорректная строка');
+    exit;
+  end;
   answ := '';
   flag := False;
   for i := 1 to __size do
@@ -140,6 +175,10 @@ var
   flag: boolean;
 begin
   GetWordsArray(ComboBox1.Items[ComboBox1.ItemIndex]);
+  if (not CheckString()) then begin
+    ShowMessage('Некорректная строка');
+    exit;
+  end;
   answ := '';
   flag := False;
   for i := 1 to __size do
