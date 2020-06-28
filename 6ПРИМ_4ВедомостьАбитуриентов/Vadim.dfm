@@ -1,5 +1,5 @@
 object Valerievich: TValerievich
-  Left = 168
+  Left = 108
   Top = 122
   Width = 797
   Height = 393

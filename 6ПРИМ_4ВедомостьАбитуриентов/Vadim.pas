@@ -273,7 +273,6 @@ begin
     for i := 1 to num_record do
       for j := 0 to 5 do
         sgrdTable.Cells[j, i] := '';
-    flag_open := True;
     CloseFile(data_file);
   end;
 end;
