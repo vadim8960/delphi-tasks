@@ -186,10 +186,10 @@ begin
     StringGrid2.Cells[j, 1] := IntToStr(1);
   end;
   StringGrid1.Cells[1, 2] := IntToStr(0);
-  StringGrid1.Cells[2, 2] := IntToStr(2);
+  StringGrid1.Cells[2, 2] := IntToStr(5);
   StringGrid1.Cells[3, 2] := IntToStr(0);
   StringGrid2.Cells[1, 2] := IntToStr(0);
-  StringGrid2.Cells[2, 2] := IntToStr(2);
+  StringGrid2.Cells[2, 2] := IntToStr(5);
   StringGrid2.Cells[3, 2] := IntToStr(0);
   for j := 1 to size_x do begin
     StringGrid1.Cells[j, 3] := IntToStr(j);
