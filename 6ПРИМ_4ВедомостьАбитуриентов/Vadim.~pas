@@ -233,7 +233,7 @@ begin
 
   btnCreate.Caption := 'Создать новую запись';
 
-  width_first_col := 150;
+  width_first_col := 130;
 
   sgrdTable.FixedCols := 0;
   sgrdTable.FixedRows := 1;
