@@ -1,9 +1,9 @@
 object Valerievich: TValerievich
-  Left = 108
-  Top = 122
-  Width = 797
-  Height = 393
-  Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1090#1085#1086#1074
+  Left = 246
+  Top = 233
+  Width = 1335
+  Height = 485
+  Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1089#1090#1091#1076#1077#1085#1090#1086#1074
   Color = clBtnFace
   Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
@@ -22,6 +22,13 @@ object Valerievich: TValerievich
     Height = 21
     Caption = #1060'.'#1048'.'#1054'.'
   end
+  object Label6: TLabel
+    Left = 16
+    Top = 288
+    Width = 183
+    Height = 21
+    Caption = #1052#1080#1085'. '#1079#1072#1088#1072#1073#1086#1090#1085#1072#1103' '#1087#1083#1072#1090#1072
+  end
   object edtName: TEdit
     Left = 16
     Top = 48
@@ -35,57 +42,64 @@ object Valerievich: TValerievich
     Top = 96
     Width = 209
     Height = 177
-    Caption = #1054#1094#1077#1085#1082#1080
+    Caption = #1044#1072#1085#1085#1099#1077
     TabOrder = 1
     object Label2: TLabel
       Left = 8
       Top = 40
-      Width = 95
+      Width = 118
       Height = 21
-      Caption = #1052#1072#1090#1077#1084#1072#1090#1080#1082#1072
+      Caption = #1053#1086#1084#1077#1088' '#1075#1088#1091#1087#1087#1099
     end
     object Label3: TLabel
       Left = 8
       Top = 88
-      Width = 59
+      Width = 112
       Height = 21
-      Caption = #1060#1080#1079#1080#1082#1072
+      Caption = #1057#1088#1077#1076#1085#1080#1081' '#1073#1072#1083#1083
     end
     object Label4: TLabel
       Left = 8
-      Top = 136
-      Width = 89
+      Top = 128
+      Width = 123
       Height = 21
-      Caption = #1057#1086#1095#1080#1085#1077#1085#1080#1077
+      Caption = #1044#1086#1093#1086#1076' '#1085#1072' '#1095#1083#1077#1085#1072
     end
-    object edtMath: TEdit
-      Left = 128
+    object Label5: TLabel
+      Left = 48
+      Top = 144
+      Width = 48
+      Height = 21
+      Caption = #1089#1077#1084#1100#1080
+    end
+    object edtGroup: TEdit
+      Left = 136
       Top = 40
-      Width = 49
+      Width = 65
       Height = 29
       TabOrder = 0
-      Text = 'edtMath'
+      Text = 'edtGroup'
     end
-    object edtPhis: TEdit
-      Left = 128
+    object edtRating: TEdit
+      Left = 136
       Top = 88
-      Width = 49
+      Width = 65
       Height = 29
       TabOrder = 1
-      Text = 'edtPhis'
+      Text = 'edtRating'
     end
-    object edtLetter: TEdit
-      Left = 128
-      Top = 136
-      Width = 49
+    object edtMoney: TEdit
+      Left = 136
+      Top = 128
+      Width = 65
       Height = 29
       TabOrder = 2
-      Text = 'edtLetter'
+      Text = 'edtMoney'
     end
   end
   object btnCreate: TButton
     Left = 16
-    Top = 288
+    Top = 368
     Width = 209
     Height = 33
     Caption = 'btnCreate'
@@ -96,18 +110,48 @@ object Valerievich: TValerievich
     Left = 248
     Top = 48
     Width = 513
-    Height = 225
+    Height = 305
+    ColCount = 4
     ScrollBars = ssVertical
     TabOrder = 3
+    RowHeights = (
+      24
+      24
+      24
+      24
+      24)
   end
   object btnClose: TButton
-    Left = 336
-    Top = 288
+    Left = 728
+    Top = 368
     Width = 83
     Height = 33
     Caption = 'btnClose'
     TabOrder = 4
     OnClick = btnCloseClick
+  end
+  object sgrdTable2: TStringGrid
+    Left = 784
+    Top = 48
+    Width = 513
+    Height = 305
+    ColCount = 4
+    ScrollBars = ssVertical
+    TabOrder = 5
+    RowHeights = (
+      24
+      24
+      24
+      24
+      24)
+  end
+  object edtMinMoney: TEdit
+    Left = 16
+    Top = 320
+    Width = 209
+    Height = 29
+    TabOrder = 6
+    Text = 'edtMinMoney'
   end
   object MainMenu1: TMainMenu
     Left = 496
@@ -139,20 +183,19 @@ object Valerievich: TValerievich
       end
       object MenuSortDescending: TMenuItem
         Caption = #1055#1086' '#1091#1073#1099#1074#1072#1085#1080#1102
-        OnClick = MenuSortDescendingClick
       end
     end
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.dat'
     Filter = #1060#1072#1081#1083#1099' '#1076#1072#1085#1085#1099#1093'|*.dat|'#1042#1089#1077' '#1092#1072#1081#1083#1099'|*.*'
-    Left = 552
-    Top = 288
+    Left = 408
+    Top = 368
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.txt'
     Filter = #1060#1072#1081#1083#1099' '#1076#1072#1085#1085#1099#1093'|*.dat|'#1042#1089#1077' '#1092#1072#1081#1083#1099'|*.*'
-    Left = 616
-    Top = 288
+    Left = 472
+    Top = 368
   end
 end

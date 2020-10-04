@@ -9,8 +9,7 @@ uses
 type
   TStudent = record
     name: String;
-    rating_arr: array [0..2] of Integer;
-    rating_mid: Real;
+    data_array: array [0..2] of Real;
   end;
 
 type
@@ -23,10 +22,10 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    edtMath: TEdit;
-    edtPhis: TEdit;
+    edtGroup: TEdit;
+    edtRating: TEdit;
     edtName: TEdit;
-    edtLetter: TEdit;
+    edtMoney: TEdit;
     btnCreate: TButton;
     sgrdTable: TStringGrid;
     OpenDialog1: TOpenDialog;
@@ -38,13 +37,16 @@ type
     MenuSortDescending: TMenuItem;
     MenuSaveAs: TMenuItem;
     btnClose: TButton;
+    sgrdTable2: TStringGrid;
+    Label5: TLabel;
+    Label6: TLabel;
+    edtMinMoney: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure MenuCreateClick(Sender: TObject);
     procedure MenuOpenClick(Sender: TObject);
     procedure btnCreateClick(Sender: TObject);
     procedure MenuSaveClick(Sender: TObject);
     procedure MenuSortAscendingClick(Sender: TObject);
-    procedure MenuSortDescendingClick(Sender: TObject);
     procedure MenuSaveAsClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
 
@@ -54,14 +56,15 @@ type
     name_cur_file: String;           // Для тестового примера + имя текущего рабочего файла
     data_file: text;                 // Файловая перменная для файла
     student_arr: array of TStudent;  // Массив студентов
-    num_record: Integer;             // Кол-во студентов
     procedure WriteDataToFile();
     procedure ReadDataFromFile();
     function CheckCorrectName(name: String) : String;
     function GetNameStudent() : String;
-    procedure FillString(var std: TStudent; ind: Integer);
+    procedure FillString(table: TStringGrid; std: TStudent; ind: Integer);
     procedure SwapStudents(s1, s2: Integer);
-    procedure QSort(l, r: Integer; type_sort: string);
+    procedure MyInsert(ind_el, ind_pl: Integer);
+    function PreporationStudenArray() : Integer;
+    procedure QSort(l, r: Integer);
   public
     { Public declarations }
   end;
@@ -70,6 +73,8 @@ var
   Valerievich: TValerievich;
 
 implementation
+
+uses StrUtils;
 
 {$R *.dfm}
 
@@ -86,9 +91,9 @@ begin
   for i := 0 to Length(student_arr) - 1 do begin
     Writeln(data_file, '');
     Writeln(data_file, student_arr[i].name);
-    for j := 0 to 1 do
-      Writeln(data_file, IntToStr(student_arr[i].rating_arr[j]));
-    Write(data_file, IntToStr(student_arr[i].rating_arr[2]));
+    Writeln(data_file, FloatToStrF(student_arr[i].data_array[0], fffixed, 10, 0));
+    Writeln(data_file, FloatToStrF(student_arr[i].data_array[1], fffixed, 10, 2));
+    Write(data_file, FloatToStrF(student_arr[i].data_array[2], fffixed, 10, 2));
   end;
   CloseFile(data_file);
 end;
@@ -96,7 +101,7 @@ end;
 procedure TValerievich.ReadDataFromFile();
 var
   tmp_str: String;
-  i: Integer;
+  num_record, i: Integer;
 begin
   AssignFile(data_file, name_cur_file);
   Reset(data_file);
@@ -115,7 +120,7 @@ begin
       for i := 0 to 2 do begin
         Readln(data_file, tmp_str);
         try
-          rating_arr[i] := StrToInt(tmp_str);
+          data_array[i] := StrToFloat(tmp_str);
         except
           ShowMessage('Неккоректный файл. Ошибка при загрузке оценок');
           exit;
@@ -123,6 +128,7 @@ begin
       end;
     end;
     sgrdTable.RowCount := num_record + 1;
+    sgrdTable2.RowCount := num_record + 1;    
   end;
   CloseFile(data_file);
 end;
@@ -160,63 +166,87 @@ begin
   result := str_tmp;
 end;
 
-procedure TValerievich.FillString(var std: TStudent; ind: Integer);
+procedure TValerievich.FillString(table: TStringGrid; std: TStudent; ind: Integer);
+var
+  i: Integer;
 begin
   with std do begin
-    sgrdTable.Cells[0, ind] := name;
-    sgrdTable.Cells[1, ind] := IntToStr(rating_arr[0]);
-    sgrdTable.Cells[2, ind] := IntToStr(rating_arr[1]);
-    sgrdTable.Cells[3, ind] := IntToStr(rating_arr[2]);
-    rating_mid := (rating_arr[0] + rating_arr[1] + rating_arr[2]) / 3;
-    sgrdTable.Cells[4, ind] := FloatToStrF(rating_mid, fffixed, 3, 3);
+    table.Cells[0, ind] := name;
+    table.Cells[1, ind] := FloatToStrF(data_array[0], fffixed, 10, 0);
+    for i := 2 to 3 do begin
+      table.Cells[i, ind] := FloatToStrF(data_array[i - 1], fffixed, 10, 2);
+    end;
+
   end;
 end;
 
 procedure TValerievich.SwapStudents(s1, s2: Integer);
 var
   tmp_str: String;
-  tmp_int, k: Integer;
+  k: Integer;
   tmp_real: Real;
 begin
   tmp_str := student_arr[s1].name;
-  tmp_real := student_arr[s1].rating_mid;
   student_arr[s1].name := student_arr[s2].name;
-  student_arr[s1].rating_mid := student_arr[s2].rating_mid;
   student_arr[s2].name := tmp_str;
-  student_arr[s2].rating_mid := tmp_real;
   for k := 0 to 2 do begin
-    tmp_int := student_arr[s1].rating_arr[k];
-    student_arr[s1].rating_arr[k] := student_arr[s2].rating_arr[k];
-    student_arr[s2].rating_arr[k] := tmp_int;
+    tmp_real := student_arr[s1].data_array[k];
+    student_arr[s1].data_array[k] := student_arr[s2].data_array[k];
+    student_arr[s2].data_array[k] := tmp_real;
   end;
 end;
 
-procedure TValerievich.QSort(l, r: Integer; type_sort: string);
+procedure TValerievich.MyInsert(ind_el, ind_pl: Integer);
+var
+  i: Integer;
+begin
+  for i := ind_el downto ind_pl + 1 do
+    SwapStudents(i, i - 1);
+end;
+
+function TValerievich.PreporationStudenArray() : Integer;
+var
+  i, j, last_ind: Integer;
+  money: Real;
+begin
+  last_ind := 0;
+  try
+    money := StrToFloat(edtMinMoney.Text);
+  except
+    ShowMessage('Неккоретные данные в поле Мин. заработная плата.');
+    exit;
+  end;
+  for i := 1 to Length(student_arr) - 1 do begin
+    if (student_arr[i].data_array[2] < money * 2) then begin
+      MyInsert(i, last_ind);
+      inc(last_ind);
+    end;
+  end;
+  Result := last_ind;
+end;
+
+procedure TValerievich.QSort(l, r: Integer);
 var
   i, j: Integer;
   q: Real;
 begin
   i := l;
   j := r;
-  q := student_arr[(l + r) div 2].rating_mid;
+  q := student_arr[(l + r) div 2].data_array[1];
   repeat
-    if type_sort = 'Ascending' then begin
-      while (student_arr[i].rating_mid < q) do i := i + 1;
-      while (q < student_arr[j].rating_mid) do j := j - 1;
-    end else if type_sort = 'Descending' then begin
-      while (student_arr[i].rating_mid > q) do i := i + 1;
-      while (q > student_arr[j].rating_mid) do j := j - 1;
-    end;
+    while (student_arr[i].data_array[1] > q) do i := i + 1;
+    while (q > student_arr[j].data_array[1]) do j := j - 1;
+
     if (i <= j) then begin
       SwapStudents(i, j);
       j := j - 1;
       i := i + 1;
     end;
   until (i > j);
-  if (l < j) then QSort(l, j, type_sort);
-  if (i < r) then QSort(i, r, type_sort);
+  if (l < j) then QSort(l, j);
+  if (i < r) then QSort(i, r);
 end;
-
+              
 //////////////////////////////
 // Form callbacks block     //
 //////////////////////////////
@@ -226,14 +256,15 @@ var
   i: Integer;
   width_first_col: Integer;
 begin
-  edtName.Text := 'Akimov Vadim';
-  edtMath.Text := '2';
-  edtPhis.Text := '3';
-  edtLetter.Text := '2';
+  edtName.Text := 'Aleksey Ivanov';
+  edtGroup.Text := '11';
+  edtRating.Text := '3,5';
+  edtMoney.Text := '10000';
+  edtMinMoney.Text := '4900';
 
   btnCreate.Caption := 'Создать новую запись';
 
-  width_first_col := 130;
+  width_first_col := 172;
 
   sgrdTable.FixedCols := 0;
   sgrdTable.FixedRows := 1;
@@ -243,12 +274,24 @@ begin
     
   with sgrdTable do begin
     Cells[0, 0] := 'Ф.И.О.';
-    Cells[1, 0] := 'Матем.';
-    Cells[2, 0] := 'Физика';
-    Cells[3, 0] := 'Сочинение';
-    Cells[4, 0] := 'Сред. балл';
+    Cells[1, 0] := 'Группа';
+    Cells[2, 0] := 'Сред. балл';
+    Cells[3, 0] := 'Доход семьи';
   end;
-  
+
+  sgrdTable2.FixedCols := 0;
+  sgrdTable2.FixedRows := 1;
+  sgrdTable2.ColWidths[0] := width_first_col;
+  for i := 1 to sgrdTable2.ColCount - 1 do
+    sgrdTable2.ColWidths[i] := (sgrdTable2.Width - width_first_col) div (sgrdTable2.ColCount - 1);
+    
+  with sgrdTable2 do begin
+    Cells[0, 0] := 'Ф.И.О.';
+    Cells[1, 0] := 'Группа';
+    Cells[2, 0] := 'Сред. балл';
+    Cells[3, 0] := 'Доход семьи';
+  end;
+
   btnClose.Caption := 'Close';
 
   flag_open := True;
@@ -256,15 +299,17 @@ begin
 
   SetLength(student_arr, 0);
 
-  name_cur_file := 'DataFiles\group23a2.dat';
+  name_cur_file := 'DataFiles\group321.dat';
   ReadDataFromFile();
-  for i := 1 to Length(student_arr) do
-    FillString(student_arr[i - 1], i);
+  for i := 1 to Length(student_arr) do begin
+    FillString(sgrdTable, student_arr[i - 1], i);  
+    FillString(sgrdTable2, student_arr[i - 1], i);
+  end;
 end;
 
 procedure TValerievich.MenuCreateClick(Sender: TObject);
 var
-  i, j: Integer;
+  num_record, i, j: Integer;
 begin
   OpenDialog1.Title := 'Создать новый файл';
   if OpenDialog1.Execute then begin
@@ -290,46 +335,50 @@ begin
     flag_open := True;
     name_cur_file := OpenDialog1.FileName;
     ReadDataFromFile();
-    for i := 1 to Length(student_arr) do
-      FillString(student_arr[i - 1], i);
+    for i := 1 to Length(student_arr) do begin
+      FillString(sgrdTable, student_arr[i - 1], i);
+      FillString(sgrdTable2, student_arr[i - 1], i);
+    end;
     btnCreate.Show;
   end;
 end;
 
 procedure TValerievich.btnCreateClick(Sender: TObject);
 var
-  i: Integer;
+  num_record, i: Integer;
 begin
   flag_saved := False;
+  num_record := Length(student_arr);
   inc(num_record);
   sgrdTable.RowCount := num_record + 1;
+  sgrdTable2.RowCount := num_record + 1;
   SetLength(student_arr, num_record);
-  Label1.Caption := IntToStr(num_record);
   with student_arr[num_record - 1] do begin
     name := GetNameStudent();
     if name = '' then begin
       exit;
     end;
     try
-      rating_arr[0] := StrToInt(edtMath.Text);
+      data_array[0] := StrToFloat(edtGroup.Text);
     except
       ShowMessage('Некорректное значение в поле Математика');
       exit;
     end;
     try
-      rating_arr[1] := StrToInt(edtPhis.Text);
+      data_array[1] := StrToFloat(edtRating.Text);
     except
       ShowMessage('Некорректное значение в поле Физика');
       exit;
     end;
     try
-      rating_arr[2] := StrToInt(edtLetter.Text);
+      data_array[2] := StrToFloat(edtMoney.Text);
     except
       ShowMessage('Некорректное значение в поле Сочинение');
       exit;
     end;
   end;
-  FillString(student_arr[num_record - 1], num_record);
+  FillString(sgrdTable, student_arr[num_record - 1], num_record);
+  FillString(sgrdTable2, student_arr[num_record - 1], num_record);  
 end;
 
 procedure TValerievich.MenuSaveClick(Sender: TObject);
@@ -345,22 +394,14 @@ end;
 
 procedure TValerievich.MenuSortAscendingClick(Sender: TObject);
 var
-  i: Integer;
+  i, last_ind: Integer;
 begin
   flag_saved := False;
-  QSort(0, Length(student_arr) - 1, 'Ascending');
+  last_ind := PreporationStudenArray();
+  QSort(0, last_ind);
+  QSort(last_ind + 1, Length(student_arr) - 1);
   for i := 1 to Length(student_arr) do
-    FillString(student_arr[i - 1], i);
-end;
-
-procedure TValerievich.MenuSortDescendingClick(Sender: TObject);
-var
-  i: Integer;
-begin
-  flag_saved := False;
-  QSort(0, Length(student_arr) - 1, 'Descending');
-  for i := 1 to Length(student_arr) do
-    FillString(student_arr[i - 1], i);
+    FillString(sgrdTable2, student_arr[i - 1], i);
 end;
 
 procedure TValerievich.MenuSaveAsClick(Sender: TObject);
