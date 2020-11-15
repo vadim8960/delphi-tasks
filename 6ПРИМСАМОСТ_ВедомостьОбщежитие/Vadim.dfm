@@ -1,6 +1,6 @@
 object Valerievich: TValerievich
-  Left = 246
-  Top = 233
+  Left = 183
+  Top = 243
   Width = 1335
   Height = 485
   Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1089#1090#1091#1076#1077#1085#1090#1086#1074
@@ -180,9 +180,6 @@ object Valerievich: TValerievich
       object MenuSortAscending: TMenuItem
         Caption = #1055#1086' '#1074#1086#1079#1088#1072#1089#1090#1072#1085#1080#1102
         OnClick = MenuSortAscendingClick
-      end
-      object MenuSortDescending: TMenuItem
-        Caption = #1055#1086' '#1091#1073#1099#1074#1072#1085#1080#1102
       end
     end
   end

@@ -34,7 +34,6 @@ type
     MenuOpen: TMenuItem;
     MenuSave: TMenuItem;
     MenuSortAscending: TMenuItem;
-    MenuSortDescending: TMenuItem;
     MenuSaveAs: TMenuItem;
     btnClose: TButton;
     sgrdTable2: TStringGrid;
