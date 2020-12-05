@@ -51,6 +51,7 @@ object Form1: TForm1
       Marks.ArrowLength = 8
       Marks.Visible = False
       SeriesColor = clRed
+      Title = 'x1 + x2 = 12'
       LinePen.Color = clRed
       LinePen.Width = 4
       XValues.DateTime = False
@@ -66,6 +67,7 @@ object Form1: TForm1
       Marks.ArrowLength = 8
       Marks.Visible = False
       SeriesColor = clGreen
+      Title = '2x1 - x2 = 12'
       LinePen.Color = clGreen
       LinePen.Width = 4
       XValues.DateTime = False
@@ -81,6 +83,7 @@ object Form1: TForm1
       Marks.ArrowLength = 8
       Marks.Visible = False
       SeriesColor = 16744703
+      Title = '2x1 - x2 = 0'
       LinePen.Color = 16744703
       LinePen.Width = 4
       XValues.DateTime = False
@@ -96,6 +99,7 @@ object Form1: TForm1
       Marks.ArrowLength = 8
       Marks.Visible = False
       SeriesColor = clBlack
+      Title = 'x21 + x2 = 4'
       LinePen.Width = 4
       XValues.DateTime = False
       XValues.Name = 'X'
@@ -109,8 +113,10 @@ object Form1: TForm1
     object Series5: TFastLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = 8388863
-      LinePen.Color = clYellow
+      SeriesColor = 4210816
+      Title = 'x2 = 0'
+      LinePen.Color = 4210816
+      LinePen.Width = 4
       XValues.DateTime = False
       XValues.Name = 'X'
       XValues.Multiplier = 1.000000000000000000
@@ -123,9 +129,9 @@ object Form1: TForm1
     object Series6: TFastLineSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clOlive
-      LinePen.Color = clOlive
-      LinePen.Width = 4
+      SeriesColor = clAqua
+      Title = #1054#1073#1083#1072#1089#1090#1100
+      LinePen.Color = clAqua
       XValues.DateTime = False
       XValues.Name = 'X'
       XValues.Multiplier = 1.000000000000000000

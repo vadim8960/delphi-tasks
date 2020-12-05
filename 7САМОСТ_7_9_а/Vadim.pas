@@ -10,11 +10,11 @@ uses
 type
   TForm1 = class(TForm)
     Chart1: TChart;
-    Series5: TFastLineSeries;
     Series1: TFastLineSeries;
     Series2: TFastLineSeries;
     Series3: TFastLineSeries;
     Series4: TFastLineSeries;
+    Series5: TFastLineSeries;
     Series6: TFastLineSeries;
     procedure FormCreate(Sender: TObject);
     procedure Chart1MoveMouse(Sender: TObject; Shift: TShiftState; X, Y: Integer);
@@ -52,6 +52,12 @@ begin
   end;
 end;
 
+function area_condition(i, y1, y2, y3, y4, y5: Extended) : Boolean;
+begin
+  Result := (i <= y1) and (i >= 0) and (i >= y2) and
+            (i <= y3) and (i >= y4) and (i >= y5);
+end;
+
 procedure redraw_chart();
 var
   x, y1, y2, y3, y4, y5: extended;
@@ -77,15 +83,14 @@ begin
     Form1.Series2.AddXY(x, y2);
     Form1.Series3.AddXY(x, y3);
     Form1.Series4.AddXY(x, y4);
-    Form1.Series6.AddXY(x, y5);
+    Form1.Series5.AddXY(x, y5);
     i := Min(y1, Min(y2, Min(y3, Min(y4, y5))));
     while (i <= Max(y1, Max(y2, Max(y3, Max(y4, y5))))) do begin
-      if (i <= y1) and (i >= 0) and (i >= y2) and
-          (i <= y3) and (i >= y4) then
-        Form1.Series5.AddXY(x, i);
+      if area_condition(i, y1, y2, y3, y4, y5) then
+        Form1.Series6.AddXY(x, i);
       i := i + h;
     end;
-    x := x + 0.1;
+    x := x + h;
   until(x > Form1.Chart1.BottomAxis.Maximum);
 
 
@@ -94,7 +99,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   xmin := -10; xmax := 10; ymin := -10; ymax := 10;
-  hx := 0.1; hy := 0.1; h := 0.1;
+  hx := 0.1; hy := 0.1; h := 0.5;
   Chart1.TabStop := True;
   init_chart();
   redraw_chart();
@@ -111,16 +116,20 @@ procedure TForm1.Chart1MouseWheel(Sender: TObject; Shift: TShiftState;
 var
   delta_size_x, delta_size_y: extended;
 begin
-  delta_size_y := Sign(WheelDelta) * (Chart1.LeftAxis.Maximum -
+  delta_size_y := WheelDelta / 120 * (Chart1.LeftAxis.Maximum -
                                       Chart1.LeftAxis.Minimum) / 10;
-  delta_size_x := Sign(WheelDelta) * (Chart1.BottomAxis.Maximum -
+  delta_size_x := WheelDelta / 120 * (Chart1.BottomAxis.Maximum -
                                       Chart1.BottomAxis.Minimum) / 10;
   Chart1.LeftAxis.Minimum := Chart1.LeftAxis.Minimum + delta_size_y;
   Chart1.LeftAxis.Maximum := Chart1.LeftAxis.Maximum - delta_size_y;
   Chart1.BottomAxis.Minimum := Chart1.BottomAxis.Minimum + delta_size_x;
   Chart1.BottomAxis.Maximum := Chart1.BottomAxis.Maximum - delta_size_x;
+  h := h - WheelDelta / 120 * h * 0.1;
+  Chart1.BottomAxis.Increment := Chart1.BottomAxis.Increment -
+                           WheelDelta / 120 * Chart1.BottomAxis.Increment * 0.1;
+  Chart1.LeftAxis.Increment := Chart1.LeftAxis.Increment -
+                           WheelDelta / 120 * Chart1.LeftAxis.Increment * 0.1;
   redraw_chart();
-  Handled := False;
 end;
 
 end.
