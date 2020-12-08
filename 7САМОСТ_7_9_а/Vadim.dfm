@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 423
-  Top = 164
-  Width = 952
+  Left = 205
+  Top = 124
+  Width = 1334
   Height = 868
-  Caption = #1057#1080#1085#1091#1082#1086#1089#1080#1082#1080
+  Caption = #1055#1086#1089#1090#1088#1086#1077#1085#1080#1077' '#1086#1073#1083#1072#1089#1090#1080
   Color = clBtnFace
   Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
@@ -43,6 +43,12 @@ object Form1: TForm1
     LeftAxis.Title.Font.Height = -19
     LeftAxis.Title.Font.Name = 'Times New Roman'
     LeftAxis.Title.Font.Style = []
+    Legend.Font.Charset = RUSSIAN_CHARSET
+    Legend.Font.Color = clBlack
+    Legend.Font.Height = -19
+    Legend.Font.Name = 'Times New Roman'
+    Legend.Font.Style = []
+    Legend.ShadowSize = 0
     View3D = False
     TabOrder = 0
     OnMouseMove = Chart1MoveMouse
@@ -126,12 +132,14 @@ object Form1: TForm1
       YValues.Multiplier = 1.000000000000000000
       YValues.Order = loNone
     end
-    object Series6: TFastLineSeries
+    object Series6: TPointSeries
       Marks.ArrowLength = 8
       Marks.Visible = False
-      SeriesColor = clAqua
+      SeriesColor = clBlack
       Title = #1054#1073#1083#1072#1089#1090#1100
-      LinePen.Color = clAqua
+      Pointer.InflateMargins = True
+      Pointer.Style = psCircle
+      Pointer.Visible = True
       XValues.DateTime = False
       XValues.Name = 'X'
       XValues.Multiplier = 1.000000000000000000
@@ -141,5 +149,62 @@ object Form1: TForm1
       YValues.Multiplier = 1.000000000000000000
       YValues.Order = loNone
     end
+  end
+  object GroupBox1: TGroupBox
+    Left = 1040
+    Top = 24
+    Width = 265
+    Height = 201
+    Caption = #1055#1077#1088#1074#1072#1103' '#1086#1073#1083#1072#1089#1090#1100
+    TabOrder = 1
+    OnClick = GroupBox1Click
+    object Image1: TImage
+      Left = 32
+      Top = 40
+      Width = 200
+      Height = 130
+      OnClick = Image1Click
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 1040
+    Top = 272
+    Width = 265
+    Height = 201
+    Caption = #1042#1090#1086#1088#1072#1103' '#1086#1073#1083#1072#1089#1090#1100
+    TabOrder = 2
+    OnClick = GroupBox2Click
+    object Image2: TImage
+      Left = 32
+      Top = 40
+      Width = 200
+      Height = 130
+      OnClick = Image2Click
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 1040
+    Top = 520
+    Width = 265
+    Height = 201
+    Caption = #1058#1088#1077#1090#1100#1103' '#1086#1073#1083#1072#1089#1090#1100
+    TabOrder = 3
+    OnClick = GroupBox3Click
+    object Image3: TImage
+      Left = 32
+      Top = 40
+      Width = 200
+      Height = 130
+      OnClick = Image3Click
+    end
+  end
+  object Button1: TButton
+    Left = 944
+    Top = 336
+    Width = 75
+    Height = 65
+    Caption = 'Button1'
+    TabOrder = 4
+    OnClick = Button1Click
   end
 end
