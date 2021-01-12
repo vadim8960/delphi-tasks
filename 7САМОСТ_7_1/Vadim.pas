@@ -613,7 +613,6 @@ begin
     4: setup_components_for_ellipse();
     5: setup_components_for_trapec();
   end;
-  RadioGroup1.ItemIndex := -1;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);

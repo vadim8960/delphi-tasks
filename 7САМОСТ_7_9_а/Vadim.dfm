@@ -30,12 +30,14 @@ object Form1: TForm1
     Title.Font.Style = []
     Title.Text.Strings = (
       #1055#1086#1089#1090#1088#1086#1077#1085#1080#1077' '#1086#1073#1083#1072#1089#1090#1080)
+    BottomAxis.PositionPercent = 50.000000000000000000
     BottomAxis.Title.Caption = 'x1'
     BottomAxis.Title.Font.Charset = RUSSIAN_CHARSET
     BottomAxis.Title.Font.Color = clBlack
     BottomAxis.Title.Font.Height = -19
     BottomAxis.Title.Font.Name = 'Times New Roman'
     BottomAxis.Title.Font.Style = []
+    LeftAxis.PositionPercent = 50.000000000000000000
     LeftAxis.Title.Angle = 0
     LeftAxis.Title.Caption = 'x2'
     LeftAxis.Title.Font.Charset = RUSSIAN_CHARSET
@@ -200,8 +202,8 @@ object Form1: TForm1
   end
   object Button1: TButton
     Left = 944
-    Top = 336
-    Width = 75
+    Top = 360
+    Width = 73
     Height = 65
     Caption = 'Button1'
     TabOrder = 4

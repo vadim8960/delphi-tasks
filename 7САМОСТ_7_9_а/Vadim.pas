@@ -43,6 +43,7 @@ type
 var
   Form1: TForm1;
   xmin, xmax, ymin, ymax, hx, hy, h: extended;
+  last_pos_x, last_pos_y: Real;
   current_plot: Integer;
   button_state: Boolean;
 
@@ -247,6 +248,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   xmin := -10; xmax := 10; ymin := -10; ymax := 10;
   hx := 0.1; hy := 0.1; h := 0.5;
+  last_pos_x := Chart1.LeftAxis.PosAxis;
+  last_pos_y := Chart1.BottomAxis.PosAxis;
   current_plot := 1;
   button_state := False;
   hide_setup_area();
@@ -257,10 +260,31 @@ begin
   redraw_chart();
 end;
 
-procedure TForm1.Chart1MoveMouse(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+// X: [74; 726] - 640px
+// Y: [59; 710] - 640px
+
+function mapping_value(x, in_min, in_max, out_min, out_max: Extended) : Extended;
 begin
-  if (ssRight in Shift) then
+  if (x > in_max) then x := in_max;
+  if (x < in_min) then x := in_min;
+  Result := (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+end;
+
+procedure TForm1.Chart1MoveMouse(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  dx, dy, x_pos, y_pos: Real;
+begin
+  dx := last_pos_x - X;
+  dy := last_pos_y - Y;
+  if (ssRight in Shift) then begin
+    x_pos := mapping_value(Chart1.LeftAxis.PositionPercent, 0, 100, 74, 726);
+    y_pos := mapping_value(Chart1.BottomAxis.PositionPercent, 0, 100, 59, 710);
+    Chart1.LeftAxis.PositionPercent := mapping_value(x_pos - dx, 74, 726, 0, 100);
+    Chart1.BottomAxis.PositionPercent := mapping_value(y_pos + dy, 59, 710, 0, 100);
     redraw_chart();
+  end;
+  last_pos_x := X;
+  last_pos_y := Y;
 end;
 
 procedure TForm1.Chart1MouseWheel(Sender: TObject; Shift: TShiftState;
